@@ -118,10 +118,14 @@ see the master build brief).
 
 ## Domains
 
-`casa1569.com.au` is the canonical domain (`siteConfig.url`).
-`casa1569.com` is a secondary domain CASA also controls; `src/proxy.ts`
-redirects it (and its `www` subdomain) to the canonical domain with a
-308, so the same deployment can serve both without duplicating the site.
+Both `casa1569.com.au` and `casa1569.com` are registered.
+`casa1569.com.au` is the canonical domain (`siteConfig.url`) — CASA is
+initially an Australian business. `casa1569.com` is kept permanently as
+protection for international growth, but never serves its own copy of
+the site: `src/proxy.ts` 308-redirects it, its `www` subdomain, and
+`www.casa1569.com.au` to the bare canonical host (preserving path and
+query string), so the same deployment can have all four hostnames
+attached without duplicate content.
 
 ## Accessibility
 
