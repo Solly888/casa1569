@@ -34,10 +34,11 @@ export default async function JournalEntryPage({
 
   return (
     <>
-      <section className="surface-dark relative flex min-h-[45vh] items-end overflow-hidden">
+      <section className="surface-dark relative flex min-h-[45vh] items-end overflow-hidden bg-atlantic-ink">
         <TexturePanel
           tone="atlantic"
           pattern="waves"
+          overlay
           className="absolute inset-0 h-full w-full"
         />
         <div className="relative z-10 w-full pb-16 pt-32 md:pb-20">

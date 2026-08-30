@@ -69,7 +69,7 @@ const chapters = [
 export default function Page1569() {
   return (
     <>
-      <section className="surface-dark relative flex min-h-[55vh] items-end overflow-hidden">
+      <section className="surface-dark relative flex min-h-[55vh] items-end overflow-hidden bg-atlantic-ink">
         <Archive
           chapter="Historical foundation"
           showLabel={false}

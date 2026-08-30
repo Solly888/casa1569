@@ -49,10 +49,11 @@ const architecture = [
 export default function HousePage() {
   return (
     <>
-      <section className="surface-dark relative flex min-h-[60vh] items-end overflow-hidden">
+      <section className="surface-dark relative flex min-h-[60vh] items-end overflow-hidden bg-atlantic-ink">
         <TexturePanel
           tone="ink"
           pattern="grid"
+          overlay
           className="absolute inset-0 h-full w-full"
         />
         <div className="relative z-10 w-full pb-16 pt-32 md:pb-20">

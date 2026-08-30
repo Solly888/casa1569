@@ -137,6 +137,7 @@ export default function TexturePanel({
   coordinates,
   className = "",
   imageHover = false,
+  overlay = false,
 }: {
   tone?: Tone;
   pattern?: Pattern;
@@ -144,6 +145,8 @@ export default function TexturePanel({
   coordinates?: string;
   className?: string;
   imageHover?: boolean;
+  /** Full-panel darkening scrim for panels carrying large hero copy — see Scene. */
+  overlay?: boolean;
 }) {
   return (
     <div
@@ -157,6 +160,13 @@ export default function TexturePanel({
         <PatternOverlay pattern={pattern} />
       </div>
       <div className="grain-overlay" aria-hidden="true" />
+      {overlay && (
+        <div
+          className="absolute inset-0"
+          style={{ background: "rgba(8,14,17,0.7)" }}
+          aria-hidden="true"
+        />
+      )}
       {(caption || coordinates) && (
         <>
           <div className="scrim-b" aria-hidden />

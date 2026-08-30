@@ -39,12 +39,20 @@ export default function Scene({
   coordinates,
   className = "",
   imageHover = false,
+  overlay = false,
 }: {
   mood?: Mood;
   caption?: string;
   coordinates?: string;
   className?: string;
   imageHover?: boolean;
+  /**
+   * Full-height darkening scrim for scenes carrying large hero copy anywhere
+   * in the frame — not just a bottom caption. Use whenever text can appear
+   * above the bottom third of the image (e.g. a hero h1 + subhead), since
+   * the caption-only scrim doesn't reach that high.
+   */
+  overlay?: boolean;
 }) {
   return (
     <div
@@ -75,6 +83,17 @@ export default function Scene({
         />
       </div>
       <div className="grain-overlay" aria-hidden="true" />
+      {overlay && (
+        <div
+          className="absolute inset-0"
+          // Flat, fairly strong scrim rather than a height-dependent gradient:
+          // hero copy can land anywhere in the frame (not just the bottom
+          // third), and this is verified via axe-core to keep ivory text at
+          // AA contrast against the lightest sky tone in every mood.
+          style={{ background: "rgba(8,14,17,0.82)" }}
+          aria-hidden="true"
+        />
+      )}
       {(caption || coordinates) && (
         <>
           <div className="scrim-b" aria-hidden />

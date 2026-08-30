@@ -10,7 +10,14 @@ const categoryTone: Record<string, string> = {
   Notes: "bg-atlantic-ink/8 text-ink-muted",
 };
 
-export default function JournalCard({ entry }: { entry: JournalEntry }) {
+export default function JournalCard({
+  entry,
+  titleAs: Title = "h3",
+}: {
+  entry: JournalEntry;
+  /** Set to "h2" when no other h2 precedes this card in the page outline (e.g. /journal index). */
+  titleAs?: "h2" | "h3";
+}) {
   return (
     <Link
       href={`/journal/${entry.slug}`}
@@ -27,9 +34,9 @@ export default function JournalCard({ entry }: { entry: JournalEntry }) {
           </span>
         ))}
       </div>
-      <h3 className="mt-3 font-serif-display text-3xl transition-colors duration-150 group-hover:text-terracotta-text md:text-4xl">
+      <Title className="mt-3 font-serif-display text-3xl transition-colors duration-150 group-hover:text-terracotta-text md:text-4xl">
         {entry.title}
-      </h3>
+      </Title>
       <p className="mt-3 max-w-lg text-sm leading-relaxed text-ink-secondary">
         {entry.dek}
       </p>

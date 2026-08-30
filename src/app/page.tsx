@@ -13,10 +13,10 @@ export default function Home() {
   return (
     <>
       {/* 1 — Hero */}
-      <section className="surface-dark relative flex min-h-[92vh] items-end overflow-hidden">
+      <section className="surface-dark relative flex min-h-[92vh] items-end overflow-hidden bg-atlantic-ink">
         <Scene
           mood="atlantic"
-          caption="São Miguel, Açores"
+          overlay
           className="absolute inset-0 h-full w-full"
         />
         <div className="relative z-10 w-full pb-16 pt-40 md:pb-24">
@@ -52,7 +52,7 @@ export default function Home() {
       </section>
 
       {/* 2 — Brand idea */}
-      <Section className="py-28 md:py-36">
+      <Section className="py-24 md:py-32">
         <Reveal className="mx-auto max-w-3xl text-center">
           <p className="font-serif-display text-3xl italic leading-tight text-ink sm:text-4xl md:text-5xl">
             Every origin has a story.
@@ -147,14 +147,15 @@ export default function Home() {
               São Miguel
             </h2>
             <p className="label-caps mt-2 text-ink-muted">
-              Açores · Portugal
+              ROTA 001 · Açores · Portugal
             </p>
             <p className="mt-6 max-w-md font-serif-display text-xl italic leading-snug text-ink-secondary">
               Volcanic soil. Atlantic rain. Tea grown on a Portuguese island
               in the middle of the ocean.
             </p>
             <p className="mt-6 max-w-md text-base leading-relaxed text-ink-secondary">
-              CASA 1569 begins at São Miguel.
+              CASA 1569 begins at São Miguel — the first entry in ROTA, our
+              numbered system for tracing each origin, harvest and producer.
             </p>
             <p className="label-caps mt-8 text-patina-text">
               Our first sourcing journey is underway.
@@ -164,7 +165,7 @@ export default function Home() {
       </Section>
 
       {/* 6 — Principles */}
-      <Section className="bg-casa-ivory-dim py-28 md:py-36">
+      <Section className="bg-casa-ivory-dim py-24 md:py-32">
         <Reveal>
           <p className="label-caps text-terracotta-text">What guides us</p>
           <h2 className="mt-4 max-w-md font-serif-display text-3xl leading-tight text-ink sm:text-4xl">
@@ -216,7 +217,7 @@ export default function Home() {
       </Section>
 
       {/* 8 — Founding origins */}
-      <Section className="py-28 md:py-36">
+      <Section className="py-32 md:py-40">
         <Reveal className="max-w-xl">
           <p className="label-caps text-terracotta-text">
             The founding collection
@@ -248,7 +249,7 @@ export default function Home() {
       </Section>
 
       {/* 9 — Cadernos da Rota */}
-      <Section className="bg-casa-ivory-dim py-28 md:py-36">
+      <Section className="bg-casa-ivory-dim py-24 md:py-32">
         <Reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="label-caps text-terracotta-text">

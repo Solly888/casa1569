@@ -38,8 +38,8 @@ const sceneMoodByVariant: Record<Origin["variant"], "atlantic" | "volcanic" | "m
 export default function OriginsPage() {
   return (
     <>
-      <section className="surface-dark relative flex min-h-[60vh] items-end overflow-hidden">
-        <Scene mood="volcanic" className="absolute inset-0 h-full w-full" />
+      <section className="surface-dark relative flex min-h-[60vh] items-end overflow-hidden bg-atlantic-ink">
+        <Scene mood="volcanic" overlay className="absolute inset-0 h-full w-full" />
         <div className="relative z-10 w-full pb-16 pt-32 md:pb-20">
           <Section>
             <Reveal>
@@ -68,6 +68,10 @@ export default function OriginsPage() {
             argument. Soil, altitude, cloud cover and a producer&rsquo;s hand
             change what ends up in the cup more than any processing
             technique. Each route below is a place first, a tea second.
+          </p>
+          <p className="label-caps mx-auto mt-6 max-w-xl text-ink-muted">
+            ROTA — the numbered system under which each origin is mapped,
+            documented and, in time, sold.
           </p>
         </Reveal>
       </Section>

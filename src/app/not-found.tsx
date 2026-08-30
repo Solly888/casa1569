@@ -4,8 +4,8 @@ import Scene from "@/components/Scene";
 
 export default function NotFound() {
   return (
-    <section className="surface-dark relative flex min-h-[70vh] items-center overflow-hidden">
-      <Scene mood="atlantic" className="absolute inset-0 h-full w-full" />
+    <section className="surface-dark relative flex min-h-[70vh] items-center overflow-hidden bg-atlantic-ink">
+      <Scene mood="atlantic" overlay className="absolute inset-0 h-full w-full" />
       <div className="relative z-10 w-full py-24 text-center">
         <Section>
           <p className="label-caps text-ivory-inverse-muted">404</p>

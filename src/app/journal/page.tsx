@@ -14,10 +14,11 @@ export const metadata: Metadata = {
 export default function JournalPage() {
   return (
     <>
-      <section className="surface-dark relative flex min-h-[50vh] items-end overflow-hidden">
+      <section className="surface-dark relative flex min-h-[50vh] items-end overflow-hidden bg-atlantic-ink">
         <TexturePanel
           tone="terracotta"
           pattern="rings"
+          overlay
           className="absolute inset-0 h-full w-full"
         />
         <div className="relative z-10 w-full pb-16 pt-32 md:pb-20">
@@ -57,7 +58,7 @@ export default function JournalPage() {
       <Section className="py-8 md:py-12">
         {journalEntries.map((entry, index) => (
           <Reveal key={entry.slug} delay={Math.min(index * 50, 150)}>
-            <JournalCard entry={entry} />
+            <JournalCard entry={entry} titleAs="h2" />
           </Reveal>
         ))}
       </Section>
