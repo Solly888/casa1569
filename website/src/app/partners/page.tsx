@@ -38,18 +38,16 @@ export default function PartnersPage() {
         <Scene mood="human" overlay className="absolute inset-0 h-full w-full" />
         <div className="relative z-10 w-full pb-16 pt-32 md:pb-20">
           <Section>
-            <Reveal>
-              <p className="label-caps text-ivory-inverse-muted">Partners</p>
-              <h1 className="mt-6 max-w-2xl font-serif-display text-5xl leading-tight text-casa-ivory sm:text-6xl md:text-7xl">
-                Built through relationships.
-              </h1>
-              <p className="mt-6 max-w-lg text-base text-ivory-inverse-muted sm:text-lg">
-                CASA 1569 is currently developing relationships with
-                growers, producers, makers and cultural partners whose work
-                reflects provenance, craft and integrity — not transactional
-                sourcing.
-              </p>
-            </Reveal>
+            <p className="label-caps text-ivory-inverse-muted">Partners</p>
+            <h1 className="mt-6 max-w-2xl font-serif-display text-5xl leading-tight text-casa-ivory sm:text-6xl md:text-7xl">
+              Built through relationships.
+            </h1>
+            <p className="mt-6 max-w-lg text-base text-ivory-inverse-muted sm:text-lg">
+              CASA 1569 is currently developing relationships with
+              growers, producers, makers and cultural partners whose work
+              reflects provenance, craft and integrity — not transactional
+              sourcing.
+            </p>
           </Section>
         </div>
       </section>

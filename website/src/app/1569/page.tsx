@@ -78,17 +78,15 @@ export default function Page1569() {
         <div className="scrim-b" aria-hidden />
         <div className="relative z-10 w-full pb-16 pt-32 md:pb-20">
           <Section>
-            <Reveal>
-              <p className="label-caps text-ivory-inverse-muted">
-                The story behind the name
-              </p>
-              <h1 className="mt-6 font-serif-display text-6xl leading-tight text-casa-ivory sm:text-7xl md:text-8xl">
-                1569
-              </h1>
-              <p className="mt-6 max-w-lg text-base text-ivory-inverse-muted sm:text-lg">
-                Not a founding date. A point of departure.
-              </p>
-            </Reveal>
+            <p className="label-caps text-ivory-inverse-muted">
+              The story behind the name
+            </p>
+            <h1 className="mt-6 font-serif-display text-6xl leading-tight text-casa-ivory sm:text-7xl md:text-8xl">
+              1569
+            </h1>
+            <p className="mt-6 max-w-lg text-base text-ivory-inverse-muted sm:text-lg">
+              Not a founding date. A point of departure.
+            </p>
           </Section>
         </div>
       </section>

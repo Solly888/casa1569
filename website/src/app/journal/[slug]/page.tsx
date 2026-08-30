@@ -43,17 +43,15 @@ export default async function JournalEntryPage({
         />
         <div className="relative z-10 w-full pb-16 pt-32 md:pb-20">
           <Section>
-            <Reveal>
-              <p className="label-caps text-ivory-inverse-muted">
-                {entry.chapter}
-              </p>
-              <h1 className="mt-6 max-w-2xl font-serif-display text-4xl leading-tight text-casa-ivory sm:text-5xl md:text-6xl">
-                {entry.title}
-              </h1>
-              <p className="mt-5 max-w-lg text-base text-ivory-inverse-muted">
-                {entry.dek}
-              </p>
-            </Reveal>
+            <p className="label-caps text-ivory-inverse-muted">
+              {entry.chapter}
+            </p>
+            <h1 className="mt-6 max-w-2xl font-serif-display text-4xl leading-tight text-casa-ivory sm:text-5xl md:text-6xl">
+              {entry.title}
+            </h1>
+            <p className="mt-5 max-w-lg text-base text-ivory-inverse-muted">
+              {entry.dek}
+            </p>
           </Section>
         </div>
       </section>

@@ -21,7 +21,10 @@ export default function Home() {
         />
         <div className="relative z-10 w-full pb-16 pt-40 md:pb-24">
           <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-            <Reveal>
+            {/* Above-the-fold hero content renders immediately — no
+                scroll-triggered Reveal, so it never depends on JS timing
+                to become visible. */}
+            <div>
               <p className="label-caps text-ivory-inverse-muted">
                 CASA 1569
               </p>
@@ -46,7 +49,7 @@ export default function Home() {
                   Our story
                 </Link>
               </div>
-            </Reveal>
+            </div>
           </div>
         </div>
       </section>

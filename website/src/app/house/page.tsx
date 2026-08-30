@@ -58,12 +58,10 @@ export default function HousePage() {
         />
         <div className="relative z-10 w-full pb-16 pt-32 md:pb-20">
           <Section>
-            <Reveal>
-              <p className="label-caps text-ivory-inverse-muted">A House of Origins</p>
-              <h1 className="mt-6 font-serif-display text-5xl leading-tight text-casa-ivory sm:text-6xl md:text-7xl">
-                The House
-              </h1>
-            </Reveal>
+            <p className="label-caps text-ivory-inverse-muted">A House of Origins</p>
+            <h1 className="mt-6 font-serif-display text-5xl leading-tight text-casa-ivory sm:text-6xl md:text-7xl">
+              The House
+            </h1>
           </Section>
         </div>
       </section>

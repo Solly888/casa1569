@@ -23,18 +23,16 @@ export default function JournalPage() {
         />
         <div className="relative z-10 w-full pb-16 pt-32 md:pb-20">
           <Section>
-            <Reveal>
-              <p className="label-caps text-ivory-inverse-muted">
-                Cadernos da Rota
-              </p>
-              <h1 className="mt-6 font-serif-display text-5xl leading-tight text-casa-ivory sm:text-6xl md:text-7xl">
-                Journal
-              </h1>
-              <p className="mt-6 max-w-lg text-base text-ivory-inverse-muted sm:text-lg">
-                Notes on origins, history and the routes tea has travelled —
-                written as the house is built, not after.
-              </p>
-            </Reveal>
+            <p className="label-caps text-ivory-inverse-muted">
+              Cadernos da Rota
+            </p>
+            <h1 className="mt-6 font-serif-display text-5xl leading-tight text-casa-ivory sm:text-6xl md:text-7xl">
+              Journal
+            </h1>
+            <p className="mt-6 max-w-lg text-base text-ivory-inverse-muted sm:text-lg">
+              Notes on origins, history and the routes tea has travelled —
+              written as the house is built, not after.
+            </p>
           </Section>
         </div>
       </section>
