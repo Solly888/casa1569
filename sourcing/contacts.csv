@@ -1,0 +1,13 @@
+Supplier,Country,Region,Role,Priority,Email,Website,Status
+Plantações Chá Gorreana,Portugal,"São Miguel, Açores",ROTA 001,A,gorreanazores@gmail.com,https://gorreana.pt/en/,Research
+Fábrica de Chá Porto Formoso,Portugal,"São Miguel, Açores",ROTA 001 backup,A,geral@chaformoso.com,https://chaformoso.com/,Research
+Wuyi Origin,China,"Wuyishan, Fujian",ROTA 002,A,,https://www.wuyiorigin.com/pages/wholesale,Research
+Tea Promoters India,India,Darjeeling / Assam,ROTA 003 / ROTA 006,A,tpi@teapromoters.in,https://www.teapromoters.com/,Research
+Empire Teas,Sri Lanka,,ROTA 004,A,info@empireteas.com,https://www.empireteas.com/,Research
+Kyoto Obubu Tea Farms,Japan,"Wazuka, Kyoto",ROTA 005,A,obubu@obubu.com,https://wholesale.obubutea.com/,Research
+Australian Tea Masters,Australia,"Geelong, Victoria",Import / co-pack,A,hello@australianteamasters.com.au,https://australianteamasters.com.au/,Research
+"Fujian Tea Import & Export Co., Ltd.",China,Fujian,ROTA 002 backup,B,mengxiaohui@cofco.com,https://www.fujian-tea.com.cn/,Research
+Glenburn Fine Tea,India,Darjeeling,ROTA 003 backup,B,info@GlenburnTeaDirect.com,https://glenburnfinetea.in/pages/wholesale,Research
+Halmari Tea Estate / Amarawati Tea,India,Assam,ROTA 006,B,msharma@amarawatitea.com,https://www.halmaritea.com/contact-us/,Research
+Mlesna Ceylon,Sri Lanka,,ROTA 004 backup,B,mlesna@mlesnateas.com,https://www.mlesnateas.lk/,Research
+Sugimoto Tea Company,Japan,,ROTA 005 scale backup,B,,https://wholesale.sugimotousa.com/pages/private-label,Research

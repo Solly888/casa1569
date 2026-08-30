@@ -1,146 +1,82 @@
-# CASA 1569 — A House of Origins
+# CASA 1569
 
-A static, launch-quality public website for **CASA 1569**, a modern
-Portuguese house of origins beginning with exceptional, single-origin tea.
+## A House of Origins
 
-The site exists to establish credibility with tea estates, exporters,
-packaging partners, press and early premium consumers — before CASA 1569
-has sold a single tin. There is no shop, no cart, no accounts: this is a
-brand and provenance site, not e-commerce.
+CASA 1569 is a modern Portuguese house of origins, beginning with exceptional single-origin tea.
 
-## Stack
+This repository is the **single source of truth for the business**: brand, sourcing, website, operating model, historical research, supplier relationships, launch planning, and AI-agent instructions.
 
-- [Next.js](https://nextjs.org) (App Router, static-export capable)
-- TypeScript
-- Tailwind CSS v4
-- No database, no auth, no external services
+> Every origin has a story.  
+> Every story has a route.
 
-## Routes
+## Current stage
 
-| Route | Purpose |
-| --- | --- |
-| `/` | Homepage — brand idea, ROTA 001, principles, founding origins |
-| `/house` | The House — positioning and brand architecture (CASA / CHÁ / ROTA / CADERNOS DA ROTA) |
-| `/origins` | The five origins currently being explored |
-| `/1569` | The history behind the name, told in five chapters |
-| `/partners` | For producers, estates, exporters and partners — enquiry form |
-| `/journal` | Cadernos da Rota — editorial notes |
-| `/journal/[slug]` | Individual journal entries |
+**Pre-launch / supplier development**
 
-## Design system
+The public website (`/website`) is built and live-ready — see
+`website/README.md` to run it locally. Immediate priorities:
 
-Visual direction: **Quiet Portuguese Luxury + Maritime Modernism + Old
-World Contemporary**. Rather than stock photography, the site uses two
-original placeholder systems documented in `src/lib/image-placeholders.ts`:
+1. ~~Establish a credible public CASA 1569 brand site.~~ Built; see `/website`.
+2. Qualify and contact founding tea producers.
+3. Sample and score candidate teas.
+4. Lock ROTA 001 — São Miguel.
+5. Finalise Australian importing/co-packing model.
+6. Build launch economics before purchasing production inventory.
 
-- **`Scene`** (`src/components/Scene.tsx`) — a documentary/cinematic
-  landscape placeholder (gradient sky, clipped horizon silhouette, grain)
-  used on the homepage hero, `/origins` and `/partners`.
-- **`Archive`** (`src/components/Archive.tsx`) — an archival/manuscript
-  placeholder (aged paper tone, ledger ruling, deckled edge, date stamp)
-  used on `/1569`, deliberately contrasting with `Scene`.
-- **`TexturePanel`** — the original cartographic panel (topography/wave/
-  grid/ring line work), still used for smaller origin thumbnails.
+## Repository map
 
-None of these depict real people, estates or places — see
-`image-placeholders.ts` for the brief to give a photographer once CASA
-1569 commissions real photography.
+This repository holds both the durable business record and the
+website implementation. See `REPO_MANIFEST.md` for the full file index
+and `decisions/0003-monorepo-structure.md` for why they're structured
+this way.
 
-### Colour tokens
+- `brand/` — brand architecture, style guide, voice, visual system.
+- `website/` — the Next.js website implementation, built against
+  `website/MASTER_BUILD_PROMPT.md`. Self-contained: run all `npm`
+  commands from inside `/website`, not the repo root.
+- `business/` — proposition, strategy, launch model, economics assumptions.
+- `sourcing/` — route strategy, supplier contacts, RFQ and evaluation process.
+- `operations/` — one-person AI-native operating model and roadmap.
+- `compliance/` — Australian import/labelling working notes.
+- `research/` — historical and category research.
+- `decisions/` — major strategic decisions and rationale.
+- `agents/` — instructions for Claude/Cursor/other agents.
+- `assets/` — current visual mood boards and brand reference images.
+- `data/` — working spreadsheets and structured business data.
 
-Brand anchors (decorative use — backgrounds, borders, gradients):
+## Brand hierarchy
 
-| Token | Hex | Role |
-| --- | --- | --- |
-| Casa Ivory | `#F1EBDD` | Primary background |
-| Atlantic Ink | `#17262C` | Primary typography / dark surfaces |
-| Azulejo Blue | `#315E6D` | Cartographic / Portuguese accent |
-| Patina | `#667063` | Botanical / São Miguel accent |
-| Terracotta | `#A85D43` | Warm architectural accent |
-| Aged Brass | `#A48656` | Premium detail |
+**Master brand:** CASA 1569  
+**Descriptor:** A House of Origins  
+**Founding category:** CHÁ  
+**Product provenance system:** ROTA  
+**Editorial:** Cadernos da Rota
 
-Accessible text tokens (each verified ≥ 4.5:1 against the specific surface
-it's designed for — see the comments in `globals.css` for the exact
-contrast ratio of each):
+## Founding routes
 
-| Token | Use |
-| --- | --- |
-| `text-ink` / `text-ink-secondary` / `text-ink-muted` | Body copy on Ivory, descending emphasis |
-| `text-ivory-inverse` / `-secondary` / `-muted` / `-faint` | Body copy on Atlantic Ink, descending emphasis |
-| `text-terracotta-text` / `text-terracotta-inverse` | Terracotta accent text on Ivory / on Atlantic Ink |
-| `text-patina-text` | Patina accent text on Ivory |
-| `text-brass-text` | Aged Brass accent text on Ivory |
-| `text-ink-decorative` | Non-text ornament only (rules, glyphs) — never real content |
+- ROTA 001 — São Miguel, Açores
+- ROTA 002 — Wuyishan / Fujian, China
+- ROTA 003 — Darjeeling, India
+- ROTA 004 — Ceylon Highlands, Sri Lanka
+- ROTA 005 — Wazuka, Kyoto, Japan
+- ROTA 006 — Assam, India (Phase 2)
 
-The `.surface-dark` class (applied to `Section dark` and any full-bleed
-dark hero) flips `:focus-visible` outlines from ink to ivory so keyboard
-focus stays visible on dark backgrounds.
+## Rule
 
-### Typography
+No agent may invent product availability, supplier agreements, historical facts, certifications, prices, trademarks, legal conclusions or customer claims.
 
-Cormorant Garamond (display serif) paired with Inter (supporting sans),
-loaded via `next/font/google`.
+If a fact is unverified, mark it **TBC**.
 
-### Motion
+## Operating philosophy
 
-Tokens in `globals.css`: `--ease-out`, `--ease-in-out`, `--duration-fast`
-(140ms), `--duration-base` (220ms), `--duration-slow` (320ms). Page
-reveals run at ~220ms ease-out with an 8px translate; hover-scale on
-imagery is gated behind `@media (hover: hover) and (pointer: fine)` so it
-never fires from a touch tap; everything respects
-`prefers-reduced-motion`.
+The company is designed to remain extremely lean. AI agents may research, draft, analyse and execute reversible workflows, while the founder retains approval over:
 
-## Getting started
-
-```bash
-npm install
-npm run dev
-```
-
-The dev server runs on **http://localhost:4287**.
-
-```bash
-npm run build   # production build
-npm run start   # serve the production build
-npm run lint    # eslint
-```
-
-## Content
-
-Site copy, origins and journal entries live in `src/lib/site-config.ts`.
-The contact email (`partners@casa1569.com.au` by default, overridable via
-`NEXT_PUBLIC_CONTACT_EMAIL`) is prepared but not confirmed live — verify
-the mailbox is monitored before launch. The partner form validates
-inline, includes a honeypot spam trap, and opens a pre-filled `mailto:`
-on submit with an always-visible fallback email link; the early-access
-form is a local, front-end-only confirmation (no backend, by design —
-see the master build brief).
-
-## Domains
-
-Both `casa1569.com.au` and `casa1569.com` are registered.
-`casa1569.com.au` is the canonical domain (`siteConfig.url`) — CASA is
-initially an Australian business. `casa1569.com` is kept permanently as
-protection for international growth, but never serves its own copy of
-the site: `src/proxy.ts` 308-redirects it, its `www` subdomain, and
-`www.casa1569.com.au` to the bare canonical host (preserving path and
-query string), so the same deployment can have all four hostnames
-attached without duplicate content.
-
-## Accessibility
-
-Skip-to-content link, semantic landmarks, `aria-current` on the active
-nav item, a focus-trapped/`Escape`-closing mobile menu that returns focus
-to its trigger, 44px+ touch targets, and the accessible colour tokens
-described above. See `globals.css` for the exact contrast ratios behind
-each token.
-
-## Project structure
-
-```
-src/
-  app/            routes (App Router), metadata, sitemap, robots, OG/apple icons, 404
-  components/     Nav, Footer, Section, Scene, Archive, TexturePanel, forms, cards
-  lib/            site content, configuration and the photography placeholder registry
-  proxy.ts        secondary-domain redirect (casa1569.com → casa1569.com.au)
-```
+- supplier contracts;
+- money movement;
+- purchase orders;
+- product selection;
+- public historical claims;
+- legal/compliance matters;
+- major pricing changes;
+- brand identity changes;
+- public crisis communications.
