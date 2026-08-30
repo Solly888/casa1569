@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  /* Brand anchors — decorative/background use (panels, borders, gradients, fills).
+     Not guaranteed WCAG AA as text; use the *-text / *-surface tokens below for copy. */
   --casa-ivory: #f1ebdd;
   --casa-ivory-dim: #e9e1cf;
   --atlantic-ink: #17262c;
@@ -10,8 +12,35 @@
   --terracotta: #a85d43;
   --aged-brass: #a48656;
 
+  /* Accessible text tokens. Each is a pre-blended solid colour, verified against
+     the specific surface it's meant to sit on (see README "Accessible colour
+     tokens" table) rather than a live alpha value, so contrast can't drift
+     silently as backgrounds change. All meet WCAG AA (4.5:1) for normal text. */
+  --ink: var(--atlantic-ink); /* 13.1:1 on casa-ivory */
+  --ink-secondary: #434d4f; /* atlantic-ink @ 80% on casa-ivory — 7.3:1 */
+  --ink-muted: #586161; /* atlantic-ink @ 70% on casa-ivory — 5.3:1 (4.9:1 on ivory-dim) */
+  --ink-decorative: rgba(23, 38, 44, 0.32); /* non-text ornament only: rules, glyphs */
+
+  --ivory-inverse: var(--casa-ivory); /* 13.1:1 on atlantic-ink */
+  --ivory-inverse-secondary: #c6c5bd; /* casa-ivory @ 82% on atlantic-ink — 8.3:1 */
+  --ivory-inverse-muted: #abaca4; /* casa-ivory @ 68% on atlantic-ink — 6.8:1 */
+  --ivory-inverse-faint: #959893; /* casa-ivory @ 58% on atlantic-ink — 5.3:1 (floor, don't go lower) */
+
+  --terracotta-text: #925540; /* terracotta darkened 15% toward ink — 4.9:1 on casa-ivory */
+  --terracotta-inverse: #ba806a; /* terracotta lightened 25% toward ivory — 4.8:1 on atlantic-ink */
+  --patina-text: #5a655b; /* patina darkened 15% toward ink — 5.1:1 on casa-ivory */
+  --brass-text: #736447; /* aged-brass darkened 35% toward ink — 4.8:1 on casa-ivory */
+  --patina-surface: #5e695e; /* patina darkened 10% — hosts ivory text at 4.9:1 */
+
   --background: var(--casa-ivory);
-  --foreground: var(--atlantic-ink);
+  --foreground: var(--ink);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --duration-fast: 140ms;
+  --duration-base: 220ms;
+  --duration-slow: 320ms;
 }
 
 @theme inline {
@@ -23,6 +52,21 @@
   --color-patina: var(--patina);
   --color-terracotta: var(--terracotta);
   --color-aged-brass: var(--aged-brass);
+
+  --color-ink: var(--ink);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-decorative: var(--ink-decorative);
+  --color-ivory-inverse: var(--ivory-inverse);
+  --color-ivory-inverse-secondary: var(--ivory-inverse-secondary);
+  --color-ivory-inverse-muted: var(--ivory-inverse-muted);
+  --color-ivory-inverse-faint: var(--ivory-inverse-faint);
+  --color-terracotta-text: var(--terracotta-text);
+  --color-terracotta-inverse: var(--terracotta-inverse);
+  --color-patina-text: var(--patina-text);
+  --color-brass-text: var(--brass-text);
+  --color-patina-surface: var(--patina-surface);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-serif: var(--font-cormorant);
@@ -34,7 +78,13 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -60,6 +110,45 @@ body {
   font-weight: 500;
 }
 
+/* Skip link — visually hidden until focused */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transform: translateY(-120%);
+  background: var(--atlantic-ink);
+  color: var(--casa-ivory);
+  padding: 0.9rem 1.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Focus ring — dark ink by default; flips to ivory inside dark surfaces. */
+:focus-visible {
+  outline: 2px solid var(--atlantic-ink);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.surface-dark :focus-visible,
+.surface-dark.focus-visible {
+  outline-color: var(--casa-ivory);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :focus-visible {
+    transition: none;
+  }
+}
+
+/* Underline affordance for real links only */
 .underline-fade {
   position: relative;
   text-decoration: none;
@@ -73,12 +162,71 @@ body {
   bottom: -0.15em;
   height: 1px;
   background: currentColor;
-  transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: right var(--duration-base) var(--ease-out);
 }
 
 .underline-fade:hover::after,
 .underline-fade:focus-visible::after {
   right: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .underline-fade::after {
+    transition: none;
+  }
+}
+
+/* Press feedback for genuine controls (buttons, submit actions) */
+.press {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .press:hover {
+    filter: brightness(1.03);
+  }
+}
+
+.press:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press,
+  .press:active {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Gated hover-scale for imagery — never fires from touch taps */
+@media (hover: hover) and (pointer: fine) {
+  .image-hover:hover .image-hover-target {
+    transform: scale(1.015);
+  }
+}
+
+.image-hover-target {
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-hover-target {
+    transition: none;
+  }
+}
+
+/* Bottom scrim so caption text stays legible over any panel tone */
+.scrim-b {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 17, 20, 0.78) 0%,
+    rgba(10, 17, 20, 0.32) 42%,
+    transparent 75%
+  );
+  pointer-events: none;
 }
 
 .grain-overlay {
@@ -93,7 +241,7 @@ body {
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -101,15 +249,21 @@ body {
   }
 }
 
+@keyframes fade-in-only {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .reveal {
-  animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fade-up var(--duration-base) var(--ease-out) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   .reveal {
-    animation: none;
+    animation: fade-in-only 160ms linear both;
   }
 }

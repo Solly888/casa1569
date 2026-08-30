@@ -14,7 +14,7 @@ export default function EarlyAccessForm() {
 
   if (status === "done") {
     return (
-      <p className="label-caps text-aged-brass">
+      <p className="label-caps text-aged-brass" role="status">
         Thank you — {email} is on the list.
       </p>
     );
@@ -33,15 +33,17 @@ export default function EarlyAccessForm() {
           id="early-access-email"
           type="email"
           required
+          autoComplete="email"
+          inputMode="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="your@email.com"
-          className="w-full border-0 border-b border-casa-ivory/30 bg-transparent px-0 py-3 text-casa-ivory placeholder:text-casa-ivory/35 focus:border-aged-brass focus:outline-none"
+          className="min-h-11 w-full border-0 border-b border-casa-ivory/30 bg-transparent px-0 py-3 text-casa-ivory placeholder:text-casa-ivory/35 focus:border-aged-brass focus:outline-none"
         />
       </div>
       <button
         type="submit"
-        className="label-caps inline-flex shrink-0 items-center justify-center border border-casa-ivory px-6 py-3 text-casa-ivory transition-colors hover:bg-casa-ivory hover:text-atlantic-ink"
+        className="press label-caps inline-flex min-h-11 shrink-0 items-center justify-center border border-casa-ivory px-6 py-3 text-casa-ivory transition-colors hover:bg-casa-ivory hover:text-atlantic-ink"
       >
         Join the House
       </button>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Origin } from "@/lib/site-config";
 import TexturePanel from "./TexturePanel";
 
@@ -19,26 +20,30 @@ const patternByVariant: Record<Origin["variant"], "topography" | "waves" | "ring
 
 export default function OriginCard({ origin }: { origin: Origin }) {
   return (
-    <article className="group flex flex-col">
+    <Link
+      href={`/origins#${origin.slug}`}
+      className="group flex flex-col focus-visible:outline-offset-4"
+    >
       <TexturePanel
         tone={toneByVariant[origin.variant]}
         pattern={patternByVariant[origin.variant]}
         caption={origin.rota}
         coordinates={origin.coordinates}
-        className="aspect-[4/5] w-full transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+        imageHover
+        className="aspect-[4/5] w-full"
       />
       <div className="pt-5">
-        <p className="label-caps text-terracotta">{origin.status}</p>
-        <h3 className="mt-2 font-serif-display text-2xl text-atlantic-ink">
+        <p className="label-caps text-terracotta-text">{origin.status}</p>
+        <h3 className="underline-fade mt-2 inline-block font-serif-display text-2xl text-ink">
           {origin.name}
         </h3>
-        <p className="label-caps mt-1 text-atlantic-ink/55">
+        <p className="label-caps mt-1 text-ink-muted">
           {origin.region} · {origin.country}
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-atlantic-ink/75">
+        <p className="mt-3 text-sm leading-relaxed text-ink-secondary">
           {origin.summary}
         </p>
       </div>
-    </article>
+    </Link>
   );
 }

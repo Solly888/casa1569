@@ -14,7 +14,7 @@ export default function Section({
   return (
     <section
       id={id}
-      className={`${dark ? "bg-atlantic-ink text-casa-ivory" : ""} ${className}`}
+      className={`${dark ? "surface-dark bg-atlantic-ink text-casa-ivory" : ""} ${className}`}
     >
       <div className="mx-auto max-w-[1400px] px-6 md:px-10">{children}</div>
     </section>

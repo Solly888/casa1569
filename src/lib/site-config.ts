@@ -1,12 +1,15 @@
 export const siteConfig = {
   name: "CASA 1569",
   descriptor: "A House of Origins",
-  url: "https://casa1569.example.com",
+  // casa1569.com.au is the canonical primary domain (Australian market).
+  // casa1569.com is the secondary domain and should redirect here — see middleware.ts.
+  url: "https://casa1569.com.au",
+  secondaryDomain: "casa1569.com",
   description:
     "CASA 1569 is a modern Portuguese house of origins, beginning with exceptional tea traced to remarkable places, producers and traditions.",
-  // Placeholder — replace with the house's real enquiries address before launch.
-  // Sourced from NEXT_PUBLIC_CONTACT_EMAIL when available.
-  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "house@casa1569.pt",
+  // Prepared mailbox for the partners channel — confirm this inbox is live and
+  // monitored before launch. Sourced from NEXT_PUBLIC_CONTACT_EMAIL when set.
+  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "partners@casa1569.com.au",
   location: "Sydney, Australia",
 };
 
@@ -122,12 +125,24 @@ export const principles = [
   },
 ];
 
+export const journalCategories = [
+  "Origin",
+  "Places",
+  "Tea",
+  "Objects",
+  "People",
+  "Notes",
+] as const;
+
+export type JournalCategory = (typeof journalCategories)[number];
+
 export type JournalEntry = {
   slug: string;
   title: string;
   dek: string;
   readTime: string;
   chapter: string;
+  categories: JournalCategory[];
   body: string[];
 };
 
@@ -138,6 +153,7 @@ export const journalEntries: JournalEntry[] = [
     dek: "On naming a house after a year that isn't a birthday.",
     readTime: "4 min",
     chapter: "Cadernos da Rota — I",
+    categories: ["Notes", "Origin"],
     body: [
       "CASA 1569 was not founded in 1569. No tea changed hands, no house opened its doors, no ship belonging to us ever left a Portuguese port that year. We chose the number anyway, and we think it's worth explaining why.",
       "In 1569, the Portuguese Dominican friar Gaspar da Cruz published his Tractado, one of the earliest Portuguese eyewitness accounts of China. Among the customs he recorded was the offering of a warm drink the Chinese called chá — a small, precise observation, made in passing, by a man who was not looking for tea and did not know he had found the beginning of something.",
@@ -151,6 +167,7 @@ export const journalEntries: JournalEntry[] = [
     dek: "How a Chinese plant came to grow on a Portuguese island.",
     readTime: "5 min",
     chapter: "Cadernos da Rota — II",
+    categories: ["Places", "Origin"],
     body: [
       "Most conversations about tea and Europe end at the ports of London or Amsterdam. Ours starts in the middle of the ocean, on São Miguel — the largest of the Azores, and one of the very few places in Europe where Camellia sinensis is grown with any seriousness.",
       "The plant arrived here in the nineteenth century, carried by trade routes and curiosity rather than colonial ambition, and found something unlikely waiting for it: volcanic soil, near-constant cloud cover, and Atlantic rain in almost the right rhythm. Tea does not usually associate itself with black sand beaches and hydrangea hedgerows. On São Miguel, it does.",
@@ -163,6 +180,7 @@ export const journalEntries: JournalEntry[] = [
     dek: "A short linguistic route through how the world came to talk about tea.",
     readTime: "4 min",
     chapter: "Cadernos da Rota — III",
+    categories: ["Tea", "Notes"],
     body: [
       "Almost every language's word for tea descends from one of two roots: chá, from Cantonese and Mandarin, or , from the Min Chinese dialects spoken around the port of Amoy. Which word a country ended up with generally traces the route its tea arrived by.",
       "Coastal trading routes through Amoy gave much of Western Europe thé, tea, Tee. Overland and early maritime contact through southern China gave Portuguese, Japanese, Korean, Hindi, Arabic, Russian and Persian speakers some version of chá.",

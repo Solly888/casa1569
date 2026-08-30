@@ -34,7 +34,7 @@ export default async function JournalEntryPage({
 
   return (
     <>
-      <section className="relative flex min-h-[45vh] items-end overflow-hidden">
+      <section className="surface-dark relative flex min-h-[45vh] items-end overflow-hidden">
         <TexturePanel
           tone="atlantic"
           pattern="waves"
@@ -43,11 +43,13 @@ export default async function JournalEntryPage({
         <div className="relative z-10 w-full pb-16 pt-32 md:pb-20">
           <Section>
             <Reveal>
-              <p className="label-caps text-casa-ivory/60">{entry.chapter}</p>
+              <p className="label-caps text-ivory-inverse-muted">
+                {entry.chapter}
+              </p>
               <h1 className="mt-6 max-w-2xl font-serif-display text-4xl leading-tight text-casa-ivory sm:text-5xl md:text-6xl">
                 {entry.title}
               </h1>
-              <p className="mt-5 max-w-lg text-base text-casa-ivory/80">
+              <p className="mt-5 max-w-lg text-base text-ivory-inverse-muted">
                 {entry.dek}
               </p>
             </Reveal>
@@ -60,7 +62,7 @@ export default async function JournalEntryPage({
           {entry.body.map((paragraph) => (
             <p
               key={paragraph.slice(0, 24)}
-              className="text-lg leading-relaxed text-atlantic-ink/80"
+              className="text-lg leading-relaxed text-ink-secondary"
             >
               {paragraph}
             </p>
@@ -70,13 +72,13 @@ export default async function JournalEntryPage({
         <Reveal className="mx-auto mt-16 flex max-w-2xl flex-col gap-6 border-t border-atlantic-ink/15 pt-10 sm:flex-row sm:items-center sm:justify-between">
           <Link
             href="/journal"
-            className="label-caps underline-fade text-atlantic-ink"
+            className="label-caps underline-fade text-ink"
           >
             Back to the journal
           </Link>
           <Link
             href={`/journal/${next.slug}`}
-            className="label-caps underline-fade text-atlantic-ink"
+            className="label-caps underline-fade text-ink"
           >
             Next — {next.title}
           </Link>

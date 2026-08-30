@@ -49,7 +49,7 @@ const architecture = [
 export default function HousePage() {
   return (
     <>
-      <section className="relative flex min-h-[60vh] items-end overflow-hidden">
+      <section className="surface-dark relative flex min-h-[60vh] items-end overflow-hidden">
         <TexturePanel
           tone="ink"
           pattern="grid"
@@ -58,7 +58,7 @@ export default function HousePage() {
         <div className="relative z-10 w-full pb-16 pt-32 md:pb-20">
           <Section>
             <Reveal>
-              <p className="label-caps text-casa-ivory/60">A House of Origins</p>
+              <p className="label-caps text-ivory-inverse-muted">A House of Origins</p>
               <h1 className="mt-6 font-serif-display text-5xl leading-tight text-casa-ivory sm:text-6xl md:text-7xl">
                 The House
               </h1>
@@ -73,7 +73,7 @@ export default function HousePage() {
             CASA 1569 is a modern Portuguese house curating exceptional
             products shaped by remarkable places.
           </p>
-          <p className="mt-6 label-caps text-terracotta">
+          <p className="mt-6 label-caps text-terracotta-text">
             Origin. Ritual. Discovery.
           </p>
         </Reveal>
@@ -82,24 +82,24 @@ export default function HousePage() {
       <Section className="bg-casa-ivory-dim py-24 md:py-32">
         <div className="grid gap-12 md:grid-cols-2 md:gap-16">
           <Reveal>
-            <p className="label-caps text-terracotta">Positioning</p>
-            <h2 className="mt-4 font-serif-display text-3xl leading-tight text-atlantic-ink sm:text-4xl">
+            <p className="label-caps text-terracotta-text">Positioning</p>
+            <h2 className="mt-4 font-serif-display text-3xl leading-tight text-ink sm:text-4xl">
               Closer to a design studio than a tea shop.
             </h2>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-atlantic-ink/75">
+            <p className="mt-6 max-w-md text-base leading-relaxed text-ink-secondary">
               CASA 1569 should feel closer to a contemporary European luxury
               house, an architectural studio or an independent editorial
               publication than to a conventional tea retailer. The category
               is tea. The discipline is provenance.
             </p>
           </Reveal>
-          <Reveal delay={100}>
-            <p className="label-caps text-terracotta">Associations</p>
+          <Reveal delay={60}>
+            <p className="label-caps text-terracotta-text">Associations</p>
             <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3">
               {associations.map((word) => (
                 <li
                   key={word}
-                  className="border-b border-atlantic-ink/15 pb-3 font-serif-display text-lg text-atlantic-ink"
+                  className="border-b border-atlantic-ink/15 pb-3 font-serif-display text-lg text-ink"
                 >
                   {word}
                 </li>
@@ -111,21 +111,21 @@ export default function HousePage() {
 
       <Section className="py-24 md:py-32">
         <Reveal className="max-w-xl">
-          <p className="label-caps text-terracotta">Brand architecture</p>
-          <h2 className="mt-4 font-serif-display text-3xl leading-tight text-atlantic-ink sm:text-4xl">
+          <p className="label-caps text-terracotta-text">Brand architecture</p>
+          <h2 className="mt-4 font-serif-display text-3xl leading-tight text-ink sm:text-4xl">
             Four words, one house.
           </h2>
         </Reveal>
         <div className="mt-14 grid gap-10 md:mt-16 md:grid-cols-2 md:gap-x-16 md:gap-y-14">
           {architecture.map((item, index) => (
-            <Reveal key={item.name} delay={index * 70}>
-              <p className="font-serif-display text-3xl text-atlantic-ink">
+            <Reveal key={item.name} delay={Math.min(index * 50, 150)}>
+              <p className="font-serif-display text-3xl text-ink">
                 {item.name}
               </p>
-              <p className="label-caps mt-2 text-atlantic-ink/50">
+              <p className="label-caps mt-2 text-ink-muted">
                 {item.role}
               </p>
-              <p className="mt-3 max-w-sm text-sm leading-relaxed text-atlantic-ink/70">
+              <p className="mt-3 max-w-sm text-sm leading-relaxed text-ink-secondary">
                 {item.body}
               </p>
             </Reveal>
@@ -139,13 +139,13 @@ export default function HousePage() {
             <h2 className="max-w-lg font-serif-display text-3xl leading-tight text-casa-ivory sm:text-4xl">
               Built to stay close to origin.
             </h2>
-            <p className="mt-6 max-w-md text-base leading-relaxed text-casa-ivory/75">
+            <p className="mt-6 max-w-md text-base leading-relaxed text-ivory-inverse-muted">
               CASA 1569 is a young house, deliberately small. We would rather
               spend our first years qualifying producers, sampling honestly
               and getting five origins right than publish a large catalogue
               we cannot stand behind.
             </p>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-casa-ivory/75">
+            <p className="mt-4 max-w-md text-base leading-relaxed text-ivory-inverse-muted">
               Nothing here is offered for sale yet. What is here is real:
               the relationships we are building, the research behind the
               name, and the standard we intend to hold.
@@ -168,7 +168,7 @@ export default function HousePage() {
               href="/partners"
               className="label-caps underline-fade text-casa-ivory"
             >
-              Partner with the house
+              Begin a conversation
             </Link>
           </div>
         </Reveal>

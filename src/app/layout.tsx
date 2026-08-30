@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: `${siteConfig.name} | ${siteConfig.descriptor}`,
     description: siteConfig.description,
@@ -54,6 +57,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     description: siteConfig.description,
     url: siteConfig.url,
     slogan: "Every origin has a story. Every story has a route.",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Sydney",
+      addressCountry: "AU",
+    },
   };
 
   return (
@@ -61,13 +69,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${cormorant.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-casa-ivory text-atlantic-ink">
+      <body className="min-h-full flex flex-col bg-casa-ivory text-ink">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <Nav />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

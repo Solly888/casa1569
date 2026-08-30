@@ -30,12 +30,25 @@ brand and provenance site, not e-commerce.
 ## Design system
 
 Visual direction: **Quiet Portuguese Luxury + Maritime Modernism + Old
-World Contemporary**. Rather than stock photography, the site uses an
-original graphic language of colour fields, fine cartographic line work
-and coordinates — consistent with the brand's own style guide, which
-calls for restraint over generic imagery.
+World Contemporary**. Rather than stock photography, the site uses two
+original placeholder systems documented in `src/lib/image-placeholders.ts`:
 
-Colour tokens (defined in `src/app/globals.css`):
+- **`Scene`** (`src/components/Scene.tsx`) — a documentary/cinematic
+  landscape placeholder (gradient sky, clipped horizon silhouette, grain)
+  used on the homepage hero, `/origins` and `/partners`.
+- **`Archive`** (`src/components/Archive.tsx`) — an archival/manuscript
+  placeholder (aged paper tone, ledger ruling, deckled edge, date stamp)
+  used on `/1569`, deliberately contrasting with `Scene`.
+- **`TexturePanel`** — the original cartographic panel (topography/wave/
+  grid/ring line work), still used for smaller origin thumbnails.
+
+None of these depict real people, estates or places — see
+`image-placeholders.ts` for the brief to give a photographer once CASA
+1569 commissions real photography.
+
+### Colour tokens
+
+Brand anchors (decorative use — backgrounds, borders, gradients):
 
 | Token | Hex | Role |
 | --- | --- | --- |
@@ -46,8 +59,36 @@ Colour tokens (defined in `src/app/globals.css`):
 | Terracotta | `#A85D43` | Warm architectural accent |
 | Aged Brass | `#A48656` | Premium detail |
 
-Typography: Cormorant Garamond (display serif) paired with Inter
-(supporting sans), loaded via `next/font/google`.
+Accessible text tokens (each verified ≥ 4.5:1 against the specific surface
+it's designed for — see the comments in `globals.css` for the exact
+contrast ratio of each):
+
+| Token | Use |
+| --- | --- |
+| `text-ink` / `text-ink-secondary` / `text-ink-muted` | Body copy on Ivory, descending emphasis |
+| `text-ivory-inverse` / `-secondary` / `-muted` / `-faint` | Body copy on Atlantic Ink, descending emphasis |
+| `text-terracotta-text` / `text-terracotta-inverse` | Terracotta accent text on Ivory / on Atlantic Ink |
+| `text-patina-text` | Patina accent text on Ivory |
+| `text-brass-text` | Aged Brass accent text on Ivory |
+| `text-ink-decorative` | Non-text ornament only (rules, glyphs) — never real content |
+
+The `.surface-dark` class (applied to `Section dark` and any full-bleed
+dark hero) flips `:focus-visible` outlines from ink to ivory so keyboard
+focus stays visible on dark backgrounds.
+
+### Typography
+
+Cormorant Garamond (display serif) paired with Inter (supporting sans),
+loaded via `next/font/google`.
+
+### Motion
+
+Tokens in `globals.css`: `--ease-out`, `--ease-in-out`, `--duration-fast`
+(140ms), `--duration-base` (220ms), `--duration-slow` (320ms). Page
+reveals run at ~220ms ease-out with an 8px translate; hover-scale on
+imagery is gated behind `@media (hover: hover) and (pointer: fine)` so it
+never fires from a touch tap; everything respects
+`prefers-reduced-motion`.
 
 ## Getting started
 
@@ -67,18 +108,35 @@ npm run lint    # eslint
 ## Content
 
 Site copy, origins and journal entries live in `src/lib/site-config.ts`.
-The contact email is a placeholder (`NEXT_PUBLIC_CONTACT_EMAIL` env var,
-falling back to a clearly marked placeholder address) — replace it with
-the house's real enquiries address before launch. The partner and
-early-access forms have no backend; the partner form opens a pre-filled
-`mailto:` link, and the early-access form is a local, front-end-only
-confirmation.
+The contact email (`partners@casa1569.com.au` by default, overridable via
+`NEXT_PUBLIC_CONTACT_EMAIL`) is prepared but not confirmed live — verify
+the mailbox is monitored before launch. The partner form validates
+inline, includes a honeypot spam trap, and opens a pre-filled `mailto:`
+on submit with an always-visible fallback email link; the early-access
+form is a local, front-end-only confirmation (no backend, by design —
+see the master build brief).
+
+## Domains
+
+`casa1569.com.au` is the canonical domain (`siteConfig.url`).
+`casa1569.com` is a secondary domain CASA also controls; `src/proxy.ts`
+redirects it (and its `www` subdomain) to the canonical domain with a
+308, so the same deployment can serve both without duplicating the site.
+
+## Accessibility
+
+Skip-to-content link, semantic landmarks, `aria-current` on the active
+nav item, a focus-trapped/`Escape`-closing mobile menu that returns focus
+to its trigger, 44px+ touch targets, and the accessible colour tokens
+described above. See `globals.css` for the exact contrast ratios behind
+each token.
 
 ## Project structure
 
 ```
 src/
-  app/            routes (App Router), metadata, sitemap, robots, OG image
-  components/     Nav, Footer, Section, TexturePanel, forms, cards
-  lib/            site content and configuration
+  app/            routes (App Router), metadata, sitemap, robots, OG/apple icons, 404
+  components/     Nav, Footer, Section, Scene, Archive, TexturePanel, forms, cards
+  lib/            site content, configuration and the photography placeholder registry
+  proxy.ts        secondary-domain redirect (casa1569.com → casa1569.com.au)
 ```

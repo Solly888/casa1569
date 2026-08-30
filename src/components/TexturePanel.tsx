@@ -136,35 +136,39 @@ export default function TexturePanel({
   caption,
   coordinates,
   className = "",
-  dark = true,
+  imageHover = false,
 }: {
   tone?: Tone;
   pattern?: Pattern;
   caption?: string;
   coordinates?: string;
   className?: string;
-  dark?: boolean;
+  imageHover?: boolean;
 }) {
   return (
     <div
-      className={`relative overflow-hidden ${className}`}
-      style={{ background: tones[tone] }}
+      className={`relative overflow-hidden ${imageHover ? "image-hover" : ""} ${className}`}
     >
-      <PatternOverlay pattern={pattern} />
-      <div className="grain-overlay" />
+      <div
+        className={imageHover ? "image-hover-target absolute inset-0" : "absolute inset-0"}
+        style={{ background: tones[tone] }}
+        aria-hidden="true"
+      >
+        <PatternOverlay pattern={pattern} />
+      </div>
+      <div className="grain-overlay" aria-hidden="true" />
       {(caption || coordinates) && (
-        <div
-          className={`absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 md:p-6 ${
-            dark ? "text-casa-ivory" : "text-atlantic-ink"
-          }`}
-        >
-          {caption && <p className="label-caps opacity-80">{caption}</p>}
-          {coordinates && (
-            <p className="label-caps whitespace-nowrap opacity-60">
-              {coordinates}
-            </p>
-          )}
-        </div>
+        <>
+          <div className="scrim-b" aria-hidden />
+          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 text-casa-ivory md:p-6">
+            {caption && <p className="label-caps opacity-95">{caption}</p>}
+            {coordinates && (
+              <p className="label-caps whitespace-nowrap opacity-75">
+                {coordinates}
+              </p>
+            )}
+          </div>
+        </>
       )}
     </div>
   );
