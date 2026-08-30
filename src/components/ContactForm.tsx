@@ -1,42 +1,64 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import {
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FocusEvent,
+  type FormEvent,
+} from "react";
 import { contactReasons, siteConfig } from "@/lib/site-config";
 
 const fieldClasses =
   "w-full border-0 border-b border-casa-ivory/30 bg-transparent px-0 py-3 text-casa-ivory placeholder:text-casa-ivory/40 focus:border-aged-brass focus:outline-none focus:ring-0 aria-invalid:border-terracotta-inverse";
 
-type FieldName = "name" | "company" | "country" | "email";
+type FieldName = "name" | "company" | "country" | "email" | "message";
 
 const requiredFields: { name: FieldName; label: string }[] = [
   { name: "name", label: "Name" },
   { name: "company", label: "Company / estate" },
   { name: "country", label: "Country" },
   { name: "email", label: "Email" },
+  { name: "message", label: "Message" },
 ];
+
+function validateField(name: FieldName, rawValue: string): string | undefined {
+  const value = rawValue.trim();
+  const field = requiredFields.find((item) => item.name === name);
+
+  if (field && !value) {
+    return `${field.label} is required.`;
+  }
+
+  if (name === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+    return "Enter a valid email address.";
+  }
+
+  return undefined;
+}
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
   const formRef = useRef<HTMLFormElement>(null);
 
-  function validate(form: HTMLFormElement) {
-    const nextErrors: Partial<Record<FieldName, string>> = {};
-    const data = new FormData(form);
+  function handleFieldBlur(
+    event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
+    const name = event.target.name as FieldName;
+    if (!requiredFields.some((field) => field.name === name)) return;
+    const error = validateField(name, event.target.value);
+    setErrors((prev) => ({ ...prev, [name]: error }));
+  }
 
-    for (const field of requiredFields) {
-      const value = String(data.get(field.name) ?? "").trim();
-      if (!value) {
-        nextErrors[field.name] = `${field.label} is required.`;
-      }
-    }
-
-    const email = String(data.get("email") ?? "").trim();
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      nextErrors.email = "Enter a valid email address.";
-    }
-
-    return nextErrors;
+  function handleFieldChange(
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
+    const name = event.target.name as FieldName;
+    if (!errors[name]) return;
+    // Clear the error as soon as the field becomes valid; re-validate fully on blur/submit.
+    const error = validateField(name, event.target.value);
+    if (!error) setErrors((prev) => ({ ...prev, [name]: undefined }));
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -50,7 +72,12 @@ export default function ContactForm() {
       return;
     }
 
-    const nextErrors = validate(form);
+    const data = new FormData(form);
+    const nextErrors: Partial<Record<FieldName, string>> = {};
+    for (const field of requiredFields) {
+      const error = validateField(field.name, String(data.get(field.name) ?? ""));
+      if (error) nextErrors[field.name] = error;
+    }
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) {
@@ -61,7 +88,6 @@ export default function ContactForm() {
       return;
     }
 
-    const data = new FormData(form);
     const name = String(data.get("name") ?? "");
     const company = String(data.get("company") ?? "");
     const country = String(data.get("country") ?? "");
@@ -145,6 +171,8 @@ export default function ContactForm() {
             name="name"
             type="text"
             autoComplete="name"
+            onBlur={handleFieldBlur}
+            onChange={handleFieldChange}
             aria-required="true"
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? "name-error" : undefined}
@@ -166,6 +194,8 @@ export default function ContactForm() {
             name="company"
             type="text"
             autoComplete="organization"
+            onBlur={handleFieldBlur}
+            onChange={handleFieldChange}
             aria-required="true"
             aria-invalid={Boolean(errors.company)}
             aria-describedby={errors.company ? "company-error" : undefined}
@@ -187,6 +217,8 @@ export default function ContactForm() {
             name="country"
             type="text"
             autoComplete="country-name"
+            onBlur={handleFieldBlur}
+            onChange={handleFieldChange}
             aria-required="true"
             aria-invalid={Boolean(errors.country)}
             aria-describedby={errors.country ? "country-error" : undefined}
@@ -209,6 +241,8 @@ export default function ContactForm() {
             type="email"
             autoComplete="email"
             inputMode="email"
+            onBlur={handleFieldBlur}
+            onChange={handleFieldChange}
             aria-required="true"
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? "email-error" : undefined}
@@ -266,8 +300,18 @@ export default function ContactForm() {
             name="message"
             rows={5}
             autoComplete="off"
+            onBlur={handleFieldBlur}
+            onChange={handleFieldChange}
+            aria-required="true"
+            aria-invalid={Boolean(errors.message)}
+            aria-describedby={errors.message ? "message-error" : undefined}
             className={`${fieldClasses} resize-none`}
           />
+          {errors.message && (
+            <p id="message-error" role="alert" className="mt-2 text-xs text-terracotta-inverse">
+              {errors.message}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-wrap items-center gap-6 md:col-span-2">
